@@ -1,9 +1,18 @@
 export function sum<T>(
   objects: T[],
   valueFunction: (object: T, index?: number) => number
-) {
+): number {
   return objects.reduce(
     (sum, object, index) => sum + valueFunction(object, index),
+    0
+  );
+}
+
+export function numberSum(
+  objects: number[]
+) {
+  return objects.reduce(
+    (sum, object) => sum + object,
     0
   );
 }

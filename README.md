@@ -1,3 +1,6 @@
 This is repository for my solutions for Advent of Code 2022 programming puzzles (https://adventofcode.com/2022/about).
 
-Puzzle solutions are implemented with TypeScript/NodeJs (v12.7.0). If ts-node is installed globally, they can be run with `ts-node dayX.ts`, where X is in range [1,25]. Alternatively ts-node can be installed locally with npm install and used with `npx ts-node dayX.ts`.
+Puzzle solutions are implemented with TypeScript/NodeJs (v18.12+). Script can be run with `./main.ts X`, where X is in range [1,25].
+If using Windows PowerShell, need to use `npx ts-node main.ts`.
+
+Run tests with `npx jest` or `npx jest --watch`.
