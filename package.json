@@ -1,0 +1,29 @@
+{
+  "name": "advent-of-code-2021",
+  "version": "1.0.0",
+  "description": "This is repository for my solutions for Advent of Code 2020 programming puzzles (https://adventofcode.com/2022/about).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Voya100/advent-of-code-2022.git"
+  },
+  "engines": {
+    "node": ">=12.7.0"
+  },
+  "keywords": [
+    "nodejs",
+    "JavaScript"
+  ],
+  "author": "Voya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Voya100/advent-of-code-2022/issues"
+  },
+  "homepage": "https://github.com/Voya100/advent-of-code-2022#readme",
+  "devDependencies": {
+    "@types/node": "^10.12.14"
+  },
+  "dependencies": {
+    "ts-node": "^9.0.0",
+    "typescript": "^4.1.2"
+  }
+}
