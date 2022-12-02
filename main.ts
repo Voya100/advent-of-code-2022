@@ -11,7 +11,7 @@ async function main() {
   const day = Number.parseInt(process.argv[2]);
 
   if (isNaN(day)) {
-    console.error(`Invalid date: ${process.argv[2]}`);
+    console.error(`Invalid day: ${process.argv[2]}`);
     return;
   }
 
@@ -34,9 +34,11 @@ async function main() {
   const part1 = module[`day${day}Part1`];
   const part2 = module[`day${day}Part2`];
 
-  console.log(`Day ${day}`);
-  console.log("Part 1", part1(input));
-  console.log("Part 2", part2(input));
+  console.log(`Day ${day}`, module);
+  const time1 = performance.now();
+  console.log(`Part 1: ${part1(input)} (${Math.round((performance.now() - time1) * 100) / 100} ms)`);
+  const time2 = performance.now();
+  console.log(`Part 2: ${part2(input)} (${Math.round((performance.now() - time2) * 100) / 100} ms)`);
 }
 
 main();
