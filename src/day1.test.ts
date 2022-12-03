@@ -1,4 +1,4 @@
-import { day1Part1, day1Part2 } from './day1';
+import { part1, part2 } from './day1';
 
 const input = `1000
 2000
@@ -17,12 +17,12 @@ const input = `1000
 
 describe('day 1, part 1', () => {
   it('should work with test input', () => {
-    expect(day1Part1(input)).toBe(24000);
+    expect(part1(input)).toBe(24000);
   })
 });
 
 describe('day 1, part 2', () => {
   it('should work with test input', () => {
-    expect(day1Part2(input)).toBe(45000);
+    expect(part2(input)).toBe(45000);
   })
 });

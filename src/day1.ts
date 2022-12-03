@@ -2,13 +2,13 @@
 
 import { numberSum } from './utils';
 
-export function day1Part1(input: string) {
+export function part1(input: string) {
   const elfCalories = parseInput(input);
   const elfCalorySums = elfCalories.map(calories => numberSum(calories));
   return Math.max(...elfCalorySums);
 }
 
-export function day1Part2(input: string) {
+export function part2(input: string) {
   const elfCalories = parseInput(input);
   const elfCalorySums = elfCalories.map(numberSum);
   const biggestCalorySums = elfCalorySums.sort((a, b) => b - a).slice(0, 3);

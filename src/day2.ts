@@ -42,13 +42,13 @@ const losingShape = Object.fromEntries(
 ) as unknown as Record<Shape, Shape>;
 
 
-export function day2Part1(input: string) {
+export function part1(input: string) {
   const rounds = parseInput1(input);
   const roundScores = rounds.map(getRoundScore1);
   return numberSum(roundScores);
 }
 
-export function day2Part2(input: string) {
+export function part2(input: string) {
   const rounds = parseInput2(input);
   const roundScores = rounds.map(getRoundScore2);
   return numberSum(roundScores);

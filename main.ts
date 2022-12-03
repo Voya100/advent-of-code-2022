@@ -31,10 +31,10 @@ async function main() {
 
   // Not most ideal from type security standpoint, but good enough for this use case
   const module = await import(`./src/day${day}`);
-  const part1 = module[`day${day}Part1`];
-  const part2 = module[`day${day}Part2`];
+  const part1 = module['part1'];
+  const part2 = module['part2'];
 
-  console.log(`Day ${day}`, module);
+  console.log(`Day ${day}`);
   const time1 = performance.now();
   console.log(`Part 1: ${part1(input)} (${Math.round((performance.now() - time1) * 100) / 100} ms)`);
   const time2 = performance.now();
