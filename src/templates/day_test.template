@@ -5,11 +5,11 @@ const input = ``;
 describe('day __DAY__, part 1', () => {
   it('should work with test input', () => {
     expect(part1(input)).toBe(null);
-  })
+  });
 });
 
 describe('day __DAY__, part 2', () => {
   it('should work with test input', () => {
     expect(part2(input)).toBe(null);
-  })
+  }):
 });

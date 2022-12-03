@@ -4,7 +4,7 @@ import { numberSum } from './utils';
 
 export function part1(input: string) {
   const elfCalories = parseInput(input);
-  const elfCalorySums = elfCalories.map(calories => numberSum(calories));
+  const elfCalorySums = elfCalories.map((calories) => numberSum(calories));
   return Math.max(...elfCalorySums);
 }
 
@@ -18,8 +18,5 @@ export function part2(input: string) {
 function parseInput(input: string) {
   return input
     .split('\n\n')
-    .map(elfInput => elfInput
-      .split('\n')
-      .map(elfInputRow => +elfInputRow)
-    );
+    .map((elfInput) => elfInput.split('\n').map((elfInputRow) => +elfInputRow));
 }

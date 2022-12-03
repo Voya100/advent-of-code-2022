@@ -8,13 +8,8 @@ export function sum<T>(
   );
 }
 
-export function numberSum(
-  objects: number[]
-) {
-  return objects.reduce(
-    (sum, object) => sum + object,
-    0
-  );
+export function numberSum(numbers: number[]) {
+  return numbers.reduce((sum, object) => sum + object, 0);
 }
 
 export function multiply<T>(
@@ -42,7 +37,7 @@ export function max<T>(objects: T[], valueFunction: (object: T) => number) {
 
 export function toCountMap<T>(values: T[]): Map<T, number> {
   const map = new Map();
-  for (let value of values) {
+  for (const value of values) {
     const count = map.get(value);
     if (count) {
       map.set(value, count + 1);
@@ -55,7 +50,7 @@ export function toCountMap<T>(values: T[]): Map<T, number> {
 
 export function median(values: number[]) {
   if (values.length % 2 === 0) {
-    return (values[values.length / 2 - 1] + values[values.length / 2]) / 2
+    return (values[values.length / 2 - 1] + values[values.length / 2]) / 2;
   }
   return values[Math.floor(values.length / 2)];
 }
@@ -69,16 +64,15 @@ export function getRange(start: number, end: number) {
 }
 
 export class ExtendedSet<T> extends Set<T> {
-
   constructor(iterable?: Iterable<T>) {
-    super(iterable)
+    super(iterable);
   }
 
   intersect(iterable?: Iterable<T>) {
     const newSet = new ExtendedSet<T>();
-    for (let value of iterable) {
+    for (const value of iterable) {
       if (this.has(value)) {
-        newSet.add(value)
+        newSet.add(value);
       }
     }
     return newSet;
@@ -86,7 +80,7 @@ export class ExtendedSet<T> extends Set<T> {
 
   difference(iterable?: Iterable<T>) {
     const newSet = new ExtendedSet(this);
-    for (let value of iterable) {
+    for (const value of iterable) {
       newSet.delete(value);
     }
     return newSet;
@@ -94,7 +88,7 @@ export class ExtendedSet<T> extends Set<T> {
 
   union(iterable?: Iterable<T>) {
     const newSet = new ExtendedSet(this);
-    for (let value of iterable) {
+    for (const value of iterable) {
       newSet.add(value);
     }
     return newSet;
@@ -103,17 +97,16 @@ export class ExtendedSet<T> extends Set<T> {
   getFistValue() {
     return this.values().next().value as T;
   }
-
 }
 
 class HeapItem<T> {
-  constructor(public object: T, public value: number) { }
+  constructor(public object: T, public value: number) {}
 }
 
 export class MinHeap<T> {
   items: HeapItem<T>[] = [];
 
-  constructor(private valueFunction: (object: T) => number) { }
+  constructor(private valueFunction: (object: T) => number) {}
 
   addItem(item: T) {
     this.items.push(new HeapItem(item, this.valueFunction(item)));
@@ -123,7 +116,7 @@ export class MinHeap<T> {
   }
 
   addItems(items: T[]) {
-    for (let item of items) {
+    for (const item of items) {
       this.items.push(new HeapItem(item, this.valueFunction(item)));
     }
     for (let i = Math.floor(this.items.length / 2); i >= 0; i--) {
@@ -139,14 +132,20 @@ export class MinHeap<T> {
     return item.object;
   }
 
-  private heapify(index: number = 0) {
+  private heapify(index = 0) {
     const left = 2 * index + 1;
     const right = 2 * (index + 1);
     let smallest = index;
-    if (left < this.items.length && this.items[left].value < this.items[smallest].value) {
+    if (
+      left < this.items.length &&
+      this.items[left].value < this.items[smallest].value
+    ) {
       smallest = left;
     }
-    if (right < this.items.length && this.items[right].value < this.items[smallest].value) {
+    if (
+      right < this.items.length &&
+      this.items[right].value < this.items[smallest].value
+    ) {
       smallest = right;
     }
     if (smallest !== index) {

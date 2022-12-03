@@ -18,11 +18,11 @@ const input = `1000
 describe('day 1, part 1', () => {
   it('should work with test input', () => {
     expect(part1(input)).toBe(24000);
-  })
+  });
 });
 
 describe('day 1, part 2', () => {
   it('should work with test input', () => {
     expect(part2(input)).toBe(45000);
-  })
+  });
 });

@@ -2,10 +2,8 @@ import { numberSum } from './utils';
 // https://adventofcode.com/2022/day/3
 
 // Could also use charCodeAt by taking into account index offset (likely more performant), but this is more explicit
-const alphabet = [
-  '', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-]
+// Space in beginning so that indexing starts at 1
+const alphabet = ' abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export function part1(input: string) {
   const sacks = parseInput1(input);
@@ -15,15 +13,16 @@ export function part1(input: string) {
 
 export function part2(input: string) {
   const sackGroups = parseInput2(input);
-  const badgeItems = sackGroups.map(findCommonCharacter).filter(char => char);
+  const badgeItems = sackGroups.map(findCommonCharacter).filter((char) => char);
   return numberSum(badgeItems.map(getPriority));
 }
 
 function parseInput1(input: string) {
-  return input.split('\n')
-    .map(row => [
+  return input
+    .split('\n')
+    .map((row) => [
       row.slice(0, Math.floor(row.length / 2)),
-      row.slice(Math.floor(row.length / 2), row.length)
+      row.slice(Math.floor(row.length / 2), row.length),
     ]);
 }
 
@@ -39,7 +38,7 @@ function parseInput2(input: string) {
 function findCommonCharacter(strings: string[]) {
   const commonCharacters = new Set(strings[0].split(''));
   for (let i = 1; i < strings.length; i++) {
-    for (let char of commonCharacters) {
+    for (const char of commonCharacters) {
       // For an input size this small it's faster to use includes of string instead of getting distinct chars with Set (~25 % faster)
       if (!strings[i].includes(char)) {
         commonCharacters.delete(char);

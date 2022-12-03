@@ -1,11 +1,13 @@
 #!/usr/bin/env -S node -r "ts-node/register"
 
-import { promises as fs } from "fs";
-import { exit } from "process";
+import { promises as fs } from 'fs';
+import { exit } from 'process';
 
 async function main() {
   if (process.argv.length <= 2) {
-    console.log('Usage: ./createDay.ts [dayNumber, 1-25]\nExample: ./createDay.ts 1');
+    console.log(
+      'Usage: ./createDay.ts [dayNumber, 1-25]\nExample: ./createDay.ts 1'
+    );
     return;
   }
 
@@ -24,11 +26,15 @@ async function main() {
   await Promise.all([
     writeFile('src/templates/day_ts.template', `src/day${day}.ts`, day),
     writeFile('src/templates/day_test.template', `src/day${day}.test.ts`, day),
-    await fs.writeFile(`inputs/day${day}.txt`, '')
+    await fs.writeFile(`inputs/day${day}.txt`, ''),
   ]);
 }
 
-async function writeFile(templatePath: string, outputPath: string, day: number) {
+async function writeFile(
+  templatePath: string,
+  outputPath: string,
+  day: number
+) {
   if (await fileExists(outputPath)) {
     console.error(`File ${day} already exists`);
     exit();
@@ -42,7 +48,10 @@ async function writeFile(templatePath: string, outputPath: string, day: number) 
 }
 
 async function fileExists(path: string) {
-  return fs.access(path, fs.constants.F_OK).then(() => true).catch(() => false);
+  return fs
+    .access(path, fs.constants.F_OK)
+    .then(() => true)
+    .catch(() => false);
 }
 
 main();
