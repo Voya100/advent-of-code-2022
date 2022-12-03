@@ -78,6 +78,14 @@ export class ExtendedSet<T> extends Set<T> {
     return newSet;
   }
 
+  intersectAll(iterables: Iterable<T>[]) {
+    let newSet = this.intersect(iterables[0]);
+    for (const iterable of iterables.slice(1)) {
+      newSet = newSet.intersect(iterable);
+    }
+    return newSet;
+  }
+
   difference(iterable?: Iterable<T>) {
     const newSet = new ExtendedSet(this);
     for (const value of iterable) {

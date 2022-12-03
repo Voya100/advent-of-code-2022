@@ -1,4 +1,4 @@
-import { numberSum } from './utils';
+import { ExtendedSet, numberSum } from './utils';
 // https://adventofcode.com/2022/day/3
 
 // Could also use charCodeAt by taking into account index offset (likely more performant), but this is more explicit
@@ -32,21 +32,12 @@ function parseInput2(input: string) {
 
 /**
  * Finds a common character between all strings.
- * Assumes that strings has at least 2 strings
  * Only first common char is returned (in this case there should always be maximum of 1 char)
  */
 function findCommonCharacter(strings: string[]) {
-  const commonCharacters = new Set(strings[0].split(''));
-  for (let i = 1; i < strings.length; i++) {
-    for (const char of commonCharacters) {
-      // For an input size this small it's faster to use includes of string instead of getting distinct chars with Set (~25 % faster)
-      if (!strings[i].includes(char)) {
-        commonCharacters.delete(char);
-      }
-    }
-  }
-  const [commonChar] = commonCharacters;
-  return commonChar;
+  return new ExtendedSet(strings[0].split(''))
+    .intersectAll(strings.slice(1))
+    .getFistValue();
 }
 
 function getPriority(char: string) {
