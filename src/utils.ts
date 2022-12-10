@@ -63,6 +63,15 @@ export function getRange(start: number, end: number) {
   return numbers;
 }
 
+export function partition<T>(values: T[], listSize: number): T[][] {
+  const partitionedValues = [];
+  for (let i = 0; i < values.length; i += listSize) {
+    partitionedValues.push(values.slice(i, i + listSize));
+  }
+
+  return partitionedValues;
+}
+
 export class ExtendedSet<T> extends Set<T> {
   constructor(iterable?: Iterable<T>) {
     super(iterable);
