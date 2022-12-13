@@ -1,7 +1,7 @@
 import { numberSum } from './utils';
 // https://adventofcode.com/2022/day/13
 
-type ComparableValue = number | (number | ComparableValue)[];
+type ComparableValue = number | ComparableValue[];
 
 export function part1(input: string) {
   const packetPairs = parseInput(input);
