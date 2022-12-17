@@ -14,16 +14,16 @@ export function findTargetWithBfs<ValueType, Options>(
   let currentNode = start;
   while (nodesToCheck.length) {
     // A dequeue would be a better solution due to shift's O(n) complexity, but is performant enough
-    currentNode = nodesToCheck.shift();
+    currentNode = nodesToCheck.shift()!;
     if (currentNode.nodeState.checked) {
       continue;
     }
     currentNode.nodeState.checked = true;
 
     for (const node of currentNode.getAdjacentNodes(options)) {
-      if (!node.nodeState.previousSquare && node !== start) {
+      if (!node.nodeState.previousNode && node !== start) {
         nodesToCheck.push(node);
-        node.nodeState.previousSquare = currentNode;
+        node.nodeState.previousNode = currentNode;
       }
       if (isTargetNode(node)) {
         return node;
@@ -37,26 +37,25 @@ export function findTargetWithBfs<ValueType, Options>(
  * Generic node type for breadth-first search (BFS)
  */
 export abstract class BfsNode<ValueType, Options> {
-  value: ValueType;
+  value!: ValueType;
 
   nodeState = {
     checked: false,
-    previousSquare: undefined as BfsNode<ValueType, Options>,
+    previousNode: undefined as BfsNode<ValueType, Options> | undefined,
   };
 
   abstract getAdjacentNodes(options: Options): BfsNode<ValueType, Options>[];
 
   getDistanceToStart(): number {
-    if (this.nodeState.previousSquare) {
-      return this.nodeState.previousSquare.getDistanceToStart() + 1;
+    if (this.nodeState.previousNode) {
+      return this.nodeState.previousNode.getDistanceToStart() + 1;
     }
     return 0;
   }
 
   get startNode(): BfsNode<ValueType, Options> {
     return (
-      (this.nodeState.previousSquare &&
-        this.nodeState.previousSquare.startNode) ||
+      (this.nodeState.previousNode && this.nodeState.previousNode.startNode) ||
       this
     );
   }
@@ -64,7 +63,7 @@ export abstract class BfsNode<ValueType, Options> {
   resetNodeState() {
     this.nodeState = {
       checked: false,
-      previousSquare: undefined,
+      previousNode: undefined,
     };
   }
 }
