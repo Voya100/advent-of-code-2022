@@ -13,14 +13,12 @@ Valve JJ has flow rate=21; tunnel leads to valve II`;
 
 describe('day 16, part 1', () => {
   it('should work with test input', () => {
-    const start = performance.now();
     expect(part1(input)).toBe(1651);
-    console.log('time', performance.now() - start);
   });
 });
 
 describe('day 16, part 2', () => {
   it('should work with test input', () => {
-    expect(part2(input)).toBe(null);
+    expect(part2(input)).toBe(1707);
   });
 });

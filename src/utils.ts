@@ -72,12 +72,40 @@ export function partition<T>(values: T[], listSize: number): T[][] {
   return partitionedValues;
 }
 
+export function getCombinations<T>(values: T[]): T[][] {
+  if (values.length === 1) {
+    return [values];
+  }
+  const subCombinations = getCombinations(values.slice(1));
+  subCombinations.push(
+    ...subCombinations.map((subCombination) => [values[0], ...subCombination])
+  );
+  subCombinations.push([values[0]]);
+
+  return subCombinations;
+}
+
+/**
+ * Split array into all possible split combinations
+ * Example: [1,2,3] => [[1,2,3],[]], [[2,3],[1]], [[1,3],[2]], [[3],[1,2]]
+ */
+export function getAllArrayPairs<T>(values: T[]): [T[], T[]][] {
+  if (values.length === 1) {
+    return [[values, []]];
+  }
+  const subPairs = getAllArrayPairs(values.slice(1));
+  return subPairs.flatMap(([array1, array2]) => [
+    [[values[0], ...array1], array2],
+    [array1, [values[0], ...array2]],
+  ]);
+}
+
 export class ExtendedSet<T> extends Set<T> {
   constructor(iterable?: Iterable<T>) {
     super(iterable);
   }
 
-  intersect(iterable?: Iterable<T>) {
+  intersect(iterable: Iterable<T>) {
     const newSet = new ExtendedSet<T>();
     for (const value of iterable) {
       if (this.has(value)) {
@@ -95,7 +123,7 @@ export class ExtendedSet<T> extends Set<T> {
     return newSet;
   }
 
-  difference(iterable?: Iterable<T>) {
+  difference(iterable: Iterable<T>) {
     const newSet = new ExtendedSet(this);
     for (const value of iterable) {
       newSet.delete(value);
@@ -103,7 +131,7 @@ export class ExtendedSet<T> extends Set<T> {
     return newSet;
   }
 
-  union(iterable?: Iterable<T>) {
+  union(iterable: Iterable<T>) {
     const newSet = new ExtendedSet(this);
     for (const value of iterable) {
       newSet.add(value);
