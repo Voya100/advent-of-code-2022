@@ -100,6 +100,63 @@ export function getAllArrayPairs<T>(values: T[]): [T[], T[]][] {
   ]);
 }
 
+/**
+ * Finds repeating number patterns by comparing differences of values of different pattern intervals.
+ * Sequential values of minLength-maxLength have same value difference as matching values in next [minPatterncount]
+ * patterns, it is a pattern.
+ * Example pattern of length 3: 1,3,6,  7,9,12  13,15,18
+ * (13-7=7-1, 15-9=9-3, 18-12=12-6)
+ * @param values          Number values from whih to find the pattern
+ * @param minLength       Minimum length of pattern
+ * @param maxLength       Maximum length of pattern
+ * @param minPatternCount How often pattern must occur sequentially
+ * @returns
+ */
+export function findPattern(
+  values: number[],
+  minLength = 250,
+  maxLength = 2500,
+  minPatternCount = 10
+) {
+  if (values.length < maxLength * (minPatternCount + 1)) {
+    return;
+  }
+  for (
+    let patternLength = minLength;
+    patternLength <= maxLength;
+    patternLength++
+  ) {
+    const patternResult = hasPattern(values, patternLength, minPatternCount);
+    if (patternResult) {
+      return patternResult;
+    }
+  }
+  return null;
+}
+
+function hasPattern(
+  values: number[],
+  patternLength: number,
+  patternCount: number
+) {
+  const start = values.length - patternLength * patternCount;
+  for (let i = 0; i < patternLength; i++) {
+    let previousValue = values[start + i];
+    let previousDiff: number | null = null;
+    for (let patternIndex = 1; patternIndex < patternCount; patternIndex++) {
+      const patternValue = values[start + i + patternIndex * patternLength];
+      const diff = patternValue - previousValue;
+      if (!previousDiff) {
+        previousDiff = diff;
+      } else if (previousDiff !== diff) {
+        return null;
+      }
+      previousValue = patternValue;
+    }
+  }
+  return { patternLength };
+}
+
 export class ExtendedSet<T> extends Set<T> {
   constructor(iterable?: Iterable<T>) {
     super(iterable);
