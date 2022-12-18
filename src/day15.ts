@@ -16,7 +16,7 @@ export function part1(input: string, yRow = 2000000) {
   const sensors = parseInput(input);
   const valueRanges = sensors
     .map((sensor) => valuesInDistanceRange(sensor, yRow))
-    .filter((range) => range);
+    .filter((range) => range) as number[][];
   const distinctRanges = getDistinctRanges(valueRanges);
   const valueSum = sum(distinctRanges, ([xStart, xEnd]) => xEnd - xStart + 1);
   // Beacons overlap on received locations
@@ -115,7 +115,9 @@ function findBeacon(sensors: Sensor[], maxX: number, maxY: number) {
 function findBeaconFromRow(sensors: Sensor[], y: number, maxX: number) {
   const ranges = sensors
     .map((sensor) => valuesInDistanceRange(sensor, y))
-    .filter((range) => range && range[1] >= 0 && range[0] <= maxX);
+    .filter(
+      (range) => range && range[1] >= 0 && range[0] <= maxX
+    ) as number[][];
   const distinctRanges = getDistinctRanges(ranges);
   let xEnd = -1;
   if (distinctRanges[distinctRanges.length - 1][1] < maxX) {
