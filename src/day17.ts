@@ -81,11 +81,7 @@ function simulate(
         return resolveHeightWithPattern(
           patternResult.patternLength,
           heights,
-          directions,
-          i,
-          directionIndex,
-          rockIndex,
-          map
+          i
         );
       }
     }
@@ -175,30 +171,15 @@ function visualise(map: string[][]) {
 function resolveHeightWithPattern(
   patternLength: number,
   heights: number[],
-  directions: Direction[],
-  roundIndex: number,
-  directionIndex: number,
-  rockIndex: number,
-  map: string[][]
+  roundIndex: number
 ) {
   const rocks = 1000000000000;
   const remainingRounds = rocks - roundIndex - 1;
-  const fullPatternRounds = Math.floor(remainingRounds / patternLength);
+  const fullPatternRounds = Math.ceil(remainingRounds / patternLength);
   const patternStartOffset = rocks - fullPatternRounds * patternLength;
   const patternIncrement =
     heights[patternStartOffset - patternLength] -
     heights[patternStartOffset - 2 * patternLength];
   const patternValue = fullPatternRounds * patternIncrement;
-  const roundsToComplete = remainingRounds % patternLength;
-  for (let j = 0; j < roundsToComplete; j++) {
-    directionIndex = addRock(
-      rockShapes[rockIndex],
-      directionIndex,
-      directions,
-      map
-    );
-    rockIndex = (rockIndex + 1) % rockShapes.length;
-    heights.push(getHighestRockHeight(map));
-  }
-  return getHighestRockHeight(map) + patternValue;
+  return heights[patternStartOffset - 1] + patternValue;
 }
