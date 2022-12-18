@@ -162,6 +162,12 @@ export class ExtendedSet<T> extends Set<T> {
     super(iterable);
   }
 
+  addAll(iterable: Iterable<T>) {
+    for (const value of iterable) {
+      this.add(value);
+    }
+  }
+
   intersect(iterable: Iterable<T>) {
     const newSet = new ExtendedSet<T>();
     for (const value of iterable) {
