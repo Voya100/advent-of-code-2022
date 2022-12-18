@@ -50,7 +50,7 @@ function parseStackInput(stackInput: string) {
   stackRows.reverse();
   // Create right amount of stacks based on first row
   const stackCount = (stackRows[0].length + 1) / 4;
-  const stacks = getRange(0, stackCount).map(() => []);
+  const stacks = getRange(0, stackCount).map(() => [] as string[]);
   for (const row of stackRows) {
     for (let i = 0; i < stackCount; i++) {
       const item = row[1 + i * 4];

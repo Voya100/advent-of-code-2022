@@ -68,7 +68,7 @@ Optional arguments:
 async function getAllDayVersionPairs() {
   const allFiles = await fs.readdir('src');
   return allFiles
-    .map((file) => file.match(/day(\d{1,2})(-)?(v\d*)?\.ts$/))
+    .map((file) => file.match(/day(\d{1,2})(-)?(v\d*)?\.ts$/)!)
     .filter((match) => match)
     .map(
       ([, day, , version]) => [+day, version] as [number, string | undefined]
@@ -78,7 +78,7 @@ async function getAllDayVersionPairs() {
 
 async function processDay(
   day: number,
-  version: string | null,
+  version: string | null | undefined,
   testPerformance: boolean
 ) {
   let input: string;

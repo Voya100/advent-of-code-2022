@@ -20,7 +20,7 @@ function getSandCount(input: string, hasFloor: boolean, floorOffset = 0) {
   );
   const coordinates = getRockCoordinates(paths);
   const startCoordinate: Coordinate = { x: 500, y: 0 };
-  let nextCoordinate = startCoordinate;
+  let nextCoordinate: Coordinate | null = startCoordinate;
   let sandCounter = 0;
   while (nextCoordinate !== null) {
     nextCoordinate = getNextCoordinate(

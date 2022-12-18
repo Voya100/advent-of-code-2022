@@ -52,7 +52,7 @@ export function parseMonkey(monkeyInput: string) {
     divisionValue,
     trueMonkeyIndex,
     falseMonkeyIndex,
-  } = monkeyInput.match(regex).groups;
+  } = monkeyInput.match(regex)!.groups!;
   return new Monkey(
     items.split(', ').map((item) => +item),
     operator as Operator,

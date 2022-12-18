@@ -19,8 +19,8 @@ interface HikeLocation {
 export function part1(input: string) {
   const nodes = parseInput(input);
   const nodeList = nodes.flatMap((nodeRow) => nodeRow);
-  const start = nodeList.find((node) => node.value.name === START);
-  const end = nodeList.find((node) => node.value.name === END);
+  const start = nodeList.find((node) => node.value.name === START)!;
+  const end = nodeList.find((node) => node.value.name === END)!;
   findTargetWithBfs(start, (node) => node === end, {
     elevationDirectionReversed: false,
   });
@@ -31,7 +31,7 @@ export function part2(input: string) {
   const nodes = parseInput(input);
   const nodeList = nodes.flatMap((nodeRow) => nodeRow);
   const targetHeight = 'a'.charCodeAt(0);
-  const end = nodeList.find((node) => node.value.name === END);
+  const end = nodeList.find((node) => node.value.name === END)!;
   // Search from end to start, since distance is same either way
   const start = findTargetWithBfs(
     end,
@@ -57,7 +57,7 @@ function parseInput(input: string) {
 }
 
 class HikeNode extends BfsNode<HikeLocation, HikeOptions> {
-  nodeMap: HikeNode[][];
+  nodeMap: HikeNode[][] = [];
 
   constructor(x: number, y: number, elevationName: string) {
     super();
@@ -71,27 +71,27 @@ class HikeNode extends BfsNode<HikeLocation, HikeOptions> {
 
   getAdjacentNodes(options: HikeOptions) {
     return [this.up, this.left, this.right, this.down].filter(
-      (square) =>
-        square &&
+      (node) =>
+        node &&
         (options.elevationDirectionReversed
-          ? this.height <= square.height + 1
-          : square.height <= this.height + 1)
-    );
+          ? this.height <= node.height + 1
+          : node.height <= this.height + 1)
+    ) as HikeNode[];
   }
 
   // Node on left side, etc.
-  get left(): HikeNode {
+  get left(): HikeNode | undefined {
     return this.x === 0 ? undefined : this.nodeMap[this.y][this.x - 1];
   }
-  get right(): HikeNode {
+  get right(): HikeNode | undefined {
     return this.x === this.nodeMap[0].length - 1
       ? undefined
       : this.nodeMap[this.y][this.x + 1];
   }
-  get up(): HikeNode {
+  get up(): HikeNode | undefined {
     return this.y === 0 ? undefined : this.nodeMap[this.y - 1][this.x];
   }
-  get down(): HikeNode {
+  get down(): HikeNode | undefined {
     return this.y === this.nodeMap.length - 1
       ? undefined
       : this.nodeMap[this.y + 1][this.x];

@@ -18,7 +18,10 @@ export function part2(input: string) {
 function parseInput(input: string) {
   return input.split('\n').map((row) => {
     const [assignment1, assignment2] = row.split(',');
-    return [parseAssignment(assignment1), parseAssignment(assignment2)];
+    return [parseAssignment(assignment1), parseAssignment(assignment2)] as [
+      Assignment,
+      Assignment
+    ];
   });
 }
 

@@ -43,7 +43,7 @@ function parseInput(input: string) {
     const [command, input] = commandRow.split(' ');
     switch (command) {
       case 'cd':
-        activeDirectory = activeDirectory.cd(input);
+        activeDirectory = activeDirectory.cd(input)!;
         break;
       case 'ls':
         activeDirectory.updateDirectoryState(outputRows);
@@ -58,7 +58,7 @@ function parseInput(input: string) {
 class Directory {
   directories: Record<string, Directory> = {};
   files: File[] = [];
-  cachedSize: number;
+  cachedSize = 0;
 
   constructor(private parentDirectory?: Directory) {}
 
