@@ -104,6 +104,7 @@ function findMaxValvePressure(
   if (!currentLocation.opened) {
     // Scenario 1: Unopen location reached => Open
     // Location stays the same to handle 1 turn delay
+    // Note: Implementation assumes that starting valve does not have flow. Otherwise first opening choice will be forced.
     currentLocation.opened = true;
     pressures.push(
       findMaxValvePressure(currentLocation, timeRemaining - 1) +
