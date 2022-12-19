@@ -185,6 +185,20 @@ function getBestInventory(
     nextInventory.obsidianRobots
   );
 
+  const neededClay =
+    (maxObsidianRobots - inventory.obsidianRobots) *
+    blueprint.obsidianRobot.clayCost;
+
+  // Hacky optimisation: If robot type is created, assume that robots from 2 dependencies ago
+  // no longer need to be created (e.g. optimised solution has already prioritised them first).
+  // Works for all tested inputs, but might not work for some edge cases.
+  if (inventory.geodeRobots || neededClay < nextInventory.clay) {
+    maxClayRobots = nextInventory.clayRobots;
+  }
+  if (inventory.obsidianRobots) {
+    maxOreRobots = nextInventory.oreRobots;
+  }
+
   let bestInventory: Inventory | null = nextInventory;
   if (
     stepsToOreRobot <= timeRemaining &&
