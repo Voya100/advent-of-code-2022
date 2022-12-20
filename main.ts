@@ -73,7 +73,12 @@ async function getAllDayVersionPairs() {
     .map(
       ([, day, , version]) => [+day, version] as [number, string | undefined]
     )
-    .sort();
+    .sort(([day1, version1], [day2, version2]) => {
+      if (day1 !== day2) {
+        return day1 - day2;
+      }
+      return (version1 || '') < (version2 || '') ? -1 : 1;
+    });
 }
 
 async function processDay(
