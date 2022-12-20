@@ -1,4 +1,5 @@
-import { ExtendedSet, numberSum } from './utils';
+import { ExtendedSet } from './data-structures/set';
+import { numberSum } from './utils';
 // https://adventofcode.com/2022/day/3
 
 // Could also use charCodeAt by taking into account index offset (likely more performant), but this is more explicit

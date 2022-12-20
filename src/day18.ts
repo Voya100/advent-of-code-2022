@@ -1,6 +1,7 @@
 // https://adventofcode.com/2022/day/18
 
-import { ExtendedSet, sum } from './utils';
+import { ExtendedSet } from './data-structures/set';
+import { sum } from './utils';
 
 interface Coordinate {
   x: number;
