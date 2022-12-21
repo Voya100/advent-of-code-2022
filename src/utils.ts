@@ -35,6 +35,17 @@ export function max<T>(objects: T[], valueFunction: (object: T) => number) {
   );
 }
 
+export function toMap<T, IdType>(
+  values: T[],
+  idFunction: (value: T) => IdType
+) {
+  const map = new Map<IdType, T>();
+  for (const value of values) {
+    map.set(idFunction(value), value);
+  }
+  return map;
+}
+
 export function toCountMap<T>(values: T[]): Map<T, number> {
   const map = new Map();
   for (const value of values) {
