@@ -46,6 +46,17 @@ export function toMap<T, IdType>(
   return map;
 }
 
+export function toRecord<T, IdType extends number | string>(
+  values: T[],
+  idFunction: (value: T) => IdType
+) {
+  const map = {} as Record<IdType, T>;
+  for (const value of values) {
+    map[idFunction(value)] = value;
+  }
+  return map;
+}
+
 export function toCountMap<T>(values: T[]): Map<T, number> {
   const map = new Map();
   for (const value of values) {
