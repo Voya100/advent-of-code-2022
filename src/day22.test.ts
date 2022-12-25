@@ -8,7 +8,7 @@ import {
   parseInput,
   part2,
   rotate,
-  RotationDirection
+  RotationDirection,
 } from './day22';
 
 const input = `        ...#
